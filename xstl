@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<movies>
+    <movie>
+        <title>The Shawshank Redemption</title>
+        <director>Frank Darabont</director>
+        <genre>Drama</genre>
+        <year>1994</year>
+        <rating>9</rating>
+        <available>yes</available>
+    </movie>
+    <movie>
+        <title>The Godfather</title>
+        <director>Francis Ford Coppola</director>
+        <genre>Crime, Drama</genre>
+        <year>1972</year>
+        <rating>9.2</rating>
+        <available>yes</available>
+    </movie>
+    <movie>
+        <title>The Dark Knight</title>
+        <director>Christopher Nolan</director>
+        <genre>Action, Crime, Drama</genre>
+        <year>2008</year>
+        <rating>9</rating>
+        <available>no</available>
+    </movie>
+</movies>
+
+
+//xstl
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/">
+  <html>
+    <head>
+      <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        th, td {
+          border: 1px solid black;
+          padding: 8px;
+          text-align: left;
+        }
+        th {
+          background-color: lightgray;
+        }
+        .high-rating {
+          background-color: yellow;
+        }
+      </style>
+    </head>
+    <body>
+      <h2>Movies</h2>
+      <table>
+        <tr>
+          <th>Title</th>
+          <th>Director</th>
+          <th>Rating</th>
+        </tr>
+        <xsl:for-each select="movies/movie">
+          <tr>
+            <xsl:choose>
+              <xsl:when test="rating &gt;= 8">
+                <xsl:attribute name="class">high-rating</xsl:attribute>
+              </xsl:when>
+            </xsl:choose>
+            <td><xsl:value-of select="title"/></td>
+            <td><xsl:value-of select="director"/></td>
+            <td><xsl:value-of select="rating"/></td>
+          </tr>
+        </xsl:for-each>
+      </table>
+    </body>
+  </html>
+</xsl:template>
+
+</xsl:stylesheet>
